@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desinflame Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Desinflame">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker registrado!'))
+            .catch(err => console.log('Erro no Service Worker:', err));
+        });
+      }
+    </script>
+    
+    <!-- 
+    INSTRUÇÕES PARA TORNAR O APP INSTALÁVEL:
+
+    1. Crie um arquivo chamado 'manifest.json' na mesma pasta com este conteúdo:
+    {
+      "name": "Desinflame Tracker",
+      "short_name": "Desinflame",
+      "description": "Acompanhe seu protocolo de 7 dias",
+      "start_url": "/",
+      "display": "standalone",
+      "background_color": "#ffffff",
+      "theme_color": "#4CAF50",
+      "icons": [
+        { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+      ]
+    }
+
+    2. Crie um arquivo chamado 'sw.js' na mesma pasta com este conteúdo:
+    const CACHE_NAME = 'desinflame-v1';
+    const urlsToCache = ['/', '/index.html', '/manifest.json'];
+    self.addEventListener('install', event => {
+      event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)));
+    });
+    self.addEventListener('fetch', event => {
+      event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
+    });
+
+    3. Crie ícones: use um site como favicon.io para gerar icon-192.png e icon-512.png
+
+    Depois disso, o app poderá ser instalado no celular!
+    -->
+  </body>
+</html>
+

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Lato", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-verde: #4CAF50;
+  --color-verde-claro: #e8f5e9;
+  --color-verde-escuro: #2e7d32;
+  --color-laranja: #FF9800;
+  --color-laranja-claro: #fff3e0;
+  --color-laranja-escuro: #ed6c02;
+  --color-bg: #f8f9fa;
+  --color-texto: #1e293b;
+  --color-texto-medio: #475569;
+  --color-texto-claro: #94a3b8;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-texto);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Custom Scrollbar for horizontal lists */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
